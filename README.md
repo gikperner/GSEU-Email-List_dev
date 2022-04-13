@@ -7,6 +7,9 @@ All files must be .csv format
 * Non-Members report using Amy's template with the title Unit_Nonmem.csv
 * Members report using Amy's template with the title Unit_Members.csv
 
+If other file names want to be used, change lines 10 and 14 from `unit_mem = pd.read_csv('Unit_Members.csv')` or `unit_nm = pd.read_csv('Unit_Nonmem.csv')`
+to `unit_mem = pd.read_csv('Insert filename here.csv')` or `unit_nm = pd.read_csv('Insert File name here.csv')` The files must still be .csv files.
+
 ### To compare
 A .csv file named Unit_list.csv
 * A column of last names called "First Name" and "Last Name" (note capitalization)
