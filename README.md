@@ -1,5 +1,9 @@
 # GSEU-Email-List_dev
 
+## Required Packages
+_____
+Pandas
+
 ## Inputs
 ____
 ### From Broadstripes:
@@ -34,4 +38,3 @@ Will output a file named Missing_Names.csv that *should* be every missing name i
 ## Current Issues
 ______
 * Will say that misspelled names are not found on Broadstripes
-* 
