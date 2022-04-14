@@ -37,29 +37,32 @@ nm_trim.set_index(['Last Name','First Name'],inplace=True)
 broad_merge = mem_trim.merge(nm_trim,on=['Last Name','First Name'],how='outer',indicator=True)
 print(broad_merge["_merge"].value_counts())
 
-# busted, check later
-# dupes = broad_merge[broad_merge["_merge"=="both"]]
-# print(f'Repeated Names:\n{dupes}')
+# Finds any records that show up in both the member and non-member lists from
+# Broadstripes
+dupes = broad_merge["_merge"]=="both"
+dupes_info = broad_merge[dupes]
+print(f'Repeated Names:\n{dupes_info}')
 
 # This drops an unneeded column
 broad_merge.drop(columns='_merge',inplace=True)
 
 # %% Full comparison
-# Reads a compiled unit list (in this case one Rose makes) and keeps the same 
+# Reads a compiled unit list, such as a GOER/HR list and keeps the same 
 # columns as before.
 
-rose_list = pd.read_csv('Unit_list.csv') # File does need to be a csv, can change
+hr_list = pd.read_csv('Unit_list.csv') # This is your GOER/HR list. 
+                                         # File does need to be a csv, can change
                                          # the name as before
-rose_trim = rose_list[['First Name','Middle Name','Last Name','Nickname','Employer',
+hr_trim = hr_list[['First Name','Middle Name','Last Name','Nickname','Employer',
                       'Department','Dues Status','Member Card Received','Personal Email',
                       'Business Email','Employer']]
 
-rose_trim.set_index(['Last Name','First Name'],inplace=True) # sets references again
+hr_trim.set_index(['Last Name','First Name'],inplace=True) # sets references again
 
 # As before, searches for matching names and checks for overlap. Left_only is 
 # names found only in the compiled report, both is the overlap between the two, and
 # right_only should be 0
-check = rose_trim.merge(broad_merge,on=['Last Name','First Name'],how='left',indicator=True)
+check = hr_trim.merge(broad_merge,on=['Last Name','First Name'],how='left',indicator=True)
 print(check["_merge"].value_counts())
 
 # Finds all the names of people only in the compiled list and NOT Broadstripes
