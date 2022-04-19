@@ -42,6 +42,7 @@ print(broad_merge["_merge"].value_counts())
 dupes = broad_merge["_merge"]=="both"
 dupes_info = broad_merge[dupes]
 print(f'Repeated Names:\n{dupes_info}')
+dupes_info.to_csv('Duplicates.csv')
 
 # This drops an unneeded column
 broad_merge.drop(columns='_merge',inplace=True)
